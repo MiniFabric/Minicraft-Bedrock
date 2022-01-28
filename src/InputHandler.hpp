@@ -5,35 +5,19 @@
 
 #include <vector>
 #include <SDL.h>
+#include "CKey.hpp"
 
 namespace MiniCraft {
-	class CKey {
-	public:
-		int presses = 0, absorbs = 0;
-		bool down = false, clicked = false;
-	public:
-		CKey() noexcept;
-
-		~CKey();
-
-		void toggle(bool pressed);
-
-		void tick();
-
-		bool operator==(const CKey &other) const;
-		bool operator!=(const CKey &other) const;
-	};
-
-	static std::vector<CKey> keys = std::vector<CKey>();
-	static CKey up = CKey();
-	static CKey down = CKey();
-	static CKey left = CKey();
-	static CKey right = CKey();
-	static CKey attack = CKey();
-	static CKey menu = CKey();
-
-
 	class CInputHandler {
+		friend class CKey;
+	public:
+		std::vector<CKey> keys = std::vector<CKey>();
+		CKey up = CKey();
+		CKey down = CKey();
+		CKey left = CKey();
+		CKey right = CKey();
+		CKey attack = CKey();
+		CKey menu = CKey();
 	public:
 		CInputHandler() = default;
 		void releaseAll();

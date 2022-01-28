@@ -3,49 +3,11 @@
 //
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "readability-convert-member-functions-to-static"
-#include <algorithm>
+
 #include <iostream>
 #include "InputHandler.hpp"
 
 namespace MiniCraft {
-	CKey::CKey() noexcept {
-		keys.push_back(*this);
-	}
-
-	CKey::~CKey() {
-		// remove reference to this key on destruction
-		keys.erase( std::remove( keys.begin(), keys.end(), *this ), keys.end() );
-	}
-
-	void CKey::toggle(bool pressed) {
-		if (pressed != down) {
-			down = pressed;
-		}
-
-		if (pressed) {
-			presses++;
-		}
-	}
-
-	void CKey::tick() {
-		if (absorbs < presses) {
-			absorbs++;
-			clicked = true;
-		} else {
-			clicked = false;
-		}
-	}
-
-	bool CKey::operator==(const CKey &other) const {
-		return other.presses == this->presses &&
-		       other.absorbs == this->absorbs &&
-		       other.clicked == this->clicked &&
-		       other.down == this->down;
-	}
-
-	bool CKey::operator!=(const CKey &other) const {
-		return !( *this == other );
-	}
 
 	void CInputHandler::releaseAll() {
 		for ( auto key : keys ) {
@@ -65,7 +27,7 @@ namespace MiniCraft {
 			case SDLK_KP_8:
 			case SDLK_w:
 			case SDLK_UP:
-				up.toggle( pressed );
+				this->up.toggle( pressed );
 				break;
 			// DOWN
 			case SDLK_KP_2:
