@@ -4,6 +4,7 @@
 #pragma once
 
 #include <vector>
+#include <SDL.h>
 
 namespace MiniCraft {
 	class CKey {
@@ -20,14 +21,25 @@ namespace MiniCraft {
 		void tick();
 
 		bool operator==(const CKey &other) const;
+		bool operator!=(const CKey &other) const;
 	};
 
-	static std::vector<CKey> *keys;
-	static CKey up;
-	static CKey down;
-	static CKey left;
-	static CKey right;
-	static CKey attack;
-	static CKey menu;
+	static std::vector<CKey> keys = std::vector<CKey>();
+	static CKey up = CKey();
+	static CKey down = CKey();
+	static CKey left = CKey();
+	static CKey right = CKey();
+	static CKey attack = CKey();
+	static CKey menu = CKey();
 
+
+	class CInputHandler {
+	public:
+		CInputHandler() = default;
+		void releaseAll();
+		void tick();
+		void toggle( SDL_Event *evt, bool pressed );
+
+		void printState();
+	};
 }

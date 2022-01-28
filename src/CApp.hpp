@@ -7,24 +7,27 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_timer.h>
+#include "InputHandler.hpp"
 
-class CApp {
-	bool    running;
-	SDL_Window* window;
-public:
-	CApp();
+namespace MiniCraft {
+	class CApp {
+		bool running;
+		SDL_Window *window;
+		CInputHandler inputHandler;
+	public:
+		CApp();
 
-	int OnExecute();
+		int OnExecute();
 
-	bool OnInit();
+		bool OnInit();
 
-	void OnEvent(SDL_Event* Event);
+		void OnEvent(SDL_Event *evt);
 
-	void OnLoop();
+		void OnLoop();
 
-	void OnRender();
+		void OnRender();
 
-	void OnCleanup();
-};
-
+		void OnCleanup();
+	};
+}
 
