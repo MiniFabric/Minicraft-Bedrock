@@ -9,6 +9,15 @@
 
 namespace MiniCraft {
 
+	CInputHandler::CInputHandler() {
+		up = CKey( *this );
+		down = CKey( *this );
+		left = CKey( *this );
+		right = CKey( *this );
+		attack = CKey( *this );
+		menu = CKey( *this );
+	}
+
 	void CInputHandler::releaseAll() {
 		for ( auto key : keys ) {
 			key.down = false;

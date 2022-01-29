@@ -1,25 +1,28 @@
 //
 // Created by ENDERZOMBI102 on 28/01/2022.
 //
-#pragma once
+#ifndef CINPUTHANDLER_HPP
+#define CINPUTHANDLER_HPP
 
 #include <vector>
 #include <SDL.h>
 #include "CKey.hpp"
 
 namespace MiniCraft {
+//	class CKey;
+
 	class CInputHandler {
 		friend class CKey;
 	public:
 		std::vector<CKey> keys = std::vector<CKey>();
-		CKey up = CKey();
-		CKey down = CKey();
-		CKey left = CKey();
-		CKey right = CKey();
-		CKey attack = CKey();
-		CKey menu = CKey();
+		CKey up;
+		CKey down;
+		CKey left;
+		CKey right;
+		CKey attack;
+		CKey menu;
 	public:
-		CInputHandler() = default;
+		CInputHandler();
 		void releaseAll();
 		void tick();
 		void toggle( SDL_Event *evt, bool pressed );
@@ -27,3 +30,5 @@ namespace MiniCraft {
 		void printState();
 	};
 }
+
+#endif

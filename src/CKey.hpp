@@ -1,7 +1,8 @@
 //
 // Created by ENDERZOMBI102 on 29/01/2022.
 //
-#pragma once
+#ifndef CKEY_HPP
+#define CKEY_HPP
 
 #include "InputHandler.hpp"
 
@@ -27,3 +28,4 @@ namespace MiniCraft {
 		bool operator!=(const CKey &other) const;
 	};
 }
+#endif
