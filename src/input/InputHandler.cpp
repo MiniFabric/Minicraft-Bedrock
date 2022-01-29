@@ -7,7 +7,7 @@
 #include <iostream>
 #include "InputHandler.hpp"
 
-namespace MiniCraft {
+namespace MiniCraft::Input {
 
 	CInputHandler::CInputHandler() {
 		up.setInputHandler( this );
@@ -61,6 +61,7 @@ namespace MiniCraft {
 			case SDLK_LALT:
 			case SDLK_RALT:
 			case SDLK_RETURN:
+			case SDLK_RETURN2:
 			case SDLK_x:
 				menu.toggle( pressed );
 				break;
@@ -80,7 +81,12 @@ namespace MiniCraft {
 	}
 
 	void CInputHandler::printState() const {
-		std::cout << "up: " << up.down << "down: " << down.down << "left: " << left.down << "right: " << right.down << "menu: " << menu.down << "attack: " << attack.down << "\n";
+		std::cout << "up: " << up.down <<
+					" down: " << down.down <<
+					" left: " << left.down <<
+					" right: " << right.down <<
+					" menu: " << menu.down <<
+					" attack: " << attack.down << "\n";
 	}
 }
 

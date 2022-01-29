@@ -6,7 +6,7 @@
 #include "CKey.hpp"
 #include "InputHandler.hpp"
 
-namespace MiniCraft {
+namespace MiniCraft::Input {
 
 	CKey::~CKey() {
 		// remove reference to this key on destruction
@@ -50,7 +50,7 @@ namespace MiniCraft {
 		return !( *this == other );
 	}
 
-	void CKey::setInputHandler( MiniCraft::CInputHandler *pHandler ) {
+	void CKey::setInputHandler( CInputHandler *pHandler ) {
 		this->handler = pHandler;
 		this->handler->keys.push_back(this);
 	}

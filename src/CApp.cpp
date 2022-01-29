@@ -13,7 +13,7 @@ namespace MiniCraft {
 	CApp::CApp() {
 		running = true;
 		window = NULL;
-		inputHandler = CInputHandler();
+		inputHandler = Input::CInputHandler();
 	}
 
 	int CApp::OnExecute() {

@@ -5,12 +5,12 @@
 #define CKEY_HPP
 
 
-namespace MiniCraft {
+namespace MiniCraft::Input {
 	class CInputHandler;
 
 	class CKey {
 	private:
-		MiniCraft::CInputHandler *handler = nullptr;
+		CInputHandler *handler = nullptr;
 
 	public:
 		int presses = 0, absorbs = 0;
@@ -21,7 +21,7 @@ namespace MiniCraft {
 
 		void toggle(bool pressed);
 		void tick();
-		void setInputHandler( MiniCraft::CInputHandler *pHandler );
+		void setInputHandler( CInputHandler *pHandler );
 
 		bool operator==(const CKey &other) const;
 		bool operator!=(const CKey &other) const;

@@ -8,7 +8,7 @@
 #include <SDL.h>
 #include "CKey.hpp"
 
-namespace MiniCraft {
+namespace MiniCraft::Input {
 //	class CKey;
 
 	class CInputHandler {

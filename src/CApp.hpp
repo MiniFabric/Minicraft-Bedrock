@@ -6,13 +6,13 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_timer.h>
-#include "InputHandler.hpp"
+#include "input/InputHandler.hpp"
 
 namespace MiniCraft {
 	class CApp {
 		bool running;
 		SDL_Window *window;
-		CInputHandler inputHandler;
+		Input::CInputHandler inputHandler;
 	public:
 		CApp();
 
