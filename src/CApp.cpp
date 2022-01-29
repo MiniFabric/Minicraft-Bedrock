@@ -6,64 +6,75 @@
 #pragma ide diagnostic ignored "modernize-use-nullptr"
 
 #include <iostream>
+#include <chrono>
 #include "CApp.hpp"
+#include "Const.hpp"
 
 namespace MiniCraft {
 
-	CApp::CApp() {
-		running = true;
-		window = NULL;
-		inputHandler = Input::CInputHandler();
+	CApp::CApp() noexcept {
+		this->running = true;
+		this->window = NULL;
+		this->inputHandler = Input::CInputHandler();
 	}
 
-	int CApp::OnExecute() {
-		if (!OnInit()) {
+	int CApp::run() {
+		std::cout << "MiniCraft Bedrock is initializing\n";
+
+		if (!initSDL() ) {
 			return -1;
 		}
+		this->initGame();
 
-		std::cout << "MiniCraft Bedrock is initializing\n";
-		std::cout << "MiniCraft Bedrock initialized!\n";
+		auto lastTime = std::chrono::high_resolution_clock::now();
+		double unprocessed = 0;
+		double nsPerTick = 1000000000.0 / 60;
+		long frames = 0;
+		long ticks = 0;
+		auto lastTimer1 = std::chrono::system_clock::now();
 
 		SDL_Event Event;
 
-		while (running) {
-			while (SDL_PollEvent(&Event)) {
-				OnEvent(&Event);
+		std::cout << "MiniCraft Bedrock initialized!\n";
+		while ( this->running ) {
+			while ( SDL_PollEvent(&Event) ) {
+				processEvent(&Event);
 			}
 
-			OnLoop();
-			OnRender();
+			tick();
+			render();
 		}
 
-		OnCleanup();
+		cleanup();
 
 		return 0;
 	}
 
-	bool CApp::OnInit() {
-		if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+	bool CApp::initSDL() {
+		if ( SDL_Init(SDL_INIT_EVERYTHING) < 0 ) {
 			return false;
 		}
 
-		window = SDL_CreateWindow(
+		this->window = SDL_CreateWindow(
 				"MiniCraft Bedrock",
 				SDL_WINDOWPOS_CENTERED,
 				SDL_WINDOWPOS_CENTERED,
-				640, 480,
-				SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL
+				MiniCraft::Const::WIDTH * MiniCraft::Const::SCALE,
+				MiniCraft::Const::HEIGHT * MiniCraft::Const::SCALE,
+				SDL_WINDOW_OPENGL | SDL_WINDOW_INPUT_GRABBED
 		);
 
-		if (window == NULL) {
+		if ( this->window == NULL ) {
 			return false;
 		}
 
 		return true;
 	}
 
-	void CApp::OnEvent(SDL_Event *evt) {
-		switch (evt->type) {
+	void CApp::processEvent(SDL_Event *evt) {
+		switch ( evt->type ) {
 			case SDL_QUIT:
-				running = false;
+				this->running = false;
 				break;
 			case SDL_KEYDOWN:
 				this->inputHandler.toggle( evt, true );
@@ -78,15 +89,23 @@ namespace MiniCraft {
 		}
 	}
 
-	void CApp::OnLoop() {
+	void CApp::tick() {
 
 	}
 
-	void CApp::OnRender() {
+	void CApp::render() {
 
 	}
 
-	void CApp::OnCleanup() {
+	void CApp::cleanup() {
+
+	}
+
+	void CApp::initGame() {
+
+	}
+
+	void CApp::resetGame() {
 
 	}
 }

@@ -14,6 +14,6 @@ add_executable(MiniCraft
 		src/input/InputHandler.cpp
 		src/input/CKey.cpp
 		src/input/CKey.hpp
-)
+		src/Const.hpp)
 
 target_link_libraries(MiniCraft SDL2)

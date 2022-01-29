@@ -22,6 +22,7 @@ namespace MiniCraft::Input {
 		CKey menu;
 	public:
 		CInputHandler();
+
 		void releaseAll();
 		void tick();
 		void toggle( SDL_Event *evt, bool pressed );

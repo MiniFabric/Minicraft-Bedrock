@@ -3,7 +3,6 @@
 //
 #pragma once
 
-
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_timer.h>
 #include "input/InputHandler.hpp"
@@ -14,19 +13,20 @@ namespace MiniCraft {
 		SDL_Window *window;
 		Input::CInputHandler inputHandler;
 	public:
-		CApp();
+		CApp() noexcept;
 
-		int OnExecute();
+		int run();
 
-		bool OnInit();
+		bool initSDL();
+		void initGame();
 
-		void OnEvent(SDL_Event *evt);
-
-		void OnLoop();
-
-		void OnRender();
-
-		void OnCleanup();
+		void processEvent(SDL_Event *evt);
+		void tick();
+		void render();
+		void cleanup();
+		void resetGame();
 	};
+
+	static CApp *GAME = new CApp(); // NOLINT(cert-err58-cpp)
 }
 
