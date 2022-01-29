@@ -56,7 +56,7 @@ namespace MiniCraft {
 		}
 
 		this->window = SDL_CreateWindow(
-				"MiniCraft Bedrock",
+				MiniCraft::Const::NAME.c_str(),
 				SDL_WINDOWPOS_CENTERED,
 				SDL_WINDOWPOS_CENTERED,
 				MiniCraft::Const::WIDTH * MiniCraft::Const::SCALE,
