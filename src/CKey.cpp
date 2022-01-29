@@ -4,17 +4,14 @@
 
 #include <algorithm>
 #include "CKey.hpp"
+#include "InputHandler.hpp"
 
 namespace MiniCraft {
 
-	CKey::CKey( CInputHandler *handler ) noexcept {
-		this->handler = handler;
-		handler->keys.push_back(*this);
-	}
-
 	CKey::~CKey() {
 		// remove reference to this key on destruction
-		handler->keys.erase( std::remove( handler->keys.begin(), handler->keys.end(), *this ), handler->keys.end() );
+		if ( this->handler != nullptr )
+			this->handler->keys.erase( std::remove( handler->keys.begin(), handler->keys.end(), *this ), handler->keys.end() );
 	}
 
 	void CKey::toggle(bool pressed) {
@@ -45,5 +42,10 @@ namespace MiniCraft {
 
 	bool CKey::operator!=(const CKey &other) const {
 		return !( *this == other );
+	}
+
+	void CKey::setInputHandler( MiniCraft::CInputHandler *pHandler ) {
+		this->handler = pHandler;
+		this->handler->keys.push_back(*this);
 	}
 }

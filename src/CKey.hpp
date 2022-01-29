@@ -4,27 +4,26 @@
 #ifndef CKEY_HPP
 #define CKEY_HPP
 
-#include "InputHandler.hpp"
 
 namespace MiniCraft {
+	class CInputHandler;
+
 	class CKey {
 	private:
-		CInputHandler *handler;
+		MiniCraft::CInputHandler *handler = nullptr;
 
 	public:
 		int presses = 0, absorbs = 0;
 		bool down = false, clicked = false;
 	public:
-		explicit CKey(CInputHandler *pHandler) noexcept;
-
+		CKey() = default;
 		~CKey();
 
 		void toggle(bool pressed);
-
 		void tick();
+		void setInputHandler( MiniCraft::CInputHandler *pHandler );
 
 		bool operator==(const CKey &other) const;
-
 		bool operator!=(const CKey &other) const;
 	};
 }

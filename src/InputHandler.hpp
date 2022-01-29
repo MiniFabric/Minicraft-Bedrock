@@ -12,7 +12,6 @@ namespace MiniCraft {
 //	class CKey;
 
 	class CInputHandler {
-		friend class CKey;
 	public:
 		std::vector<CKey> keys = std::vector<CKey>();
 		CKey up;

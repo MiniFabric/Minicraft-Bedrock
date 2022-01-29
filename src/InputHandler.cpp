@@ -10,12 +10,12 @@
 namespace MiniCraft {
 
 	CInputHandler::CInputHandler() {
-		up = CKey( *this );
-		down = CKey( *this );
-		left = CKey( *this );
-		right = CKey( *this );
-		attack = CKey( *this );
-		menu = CKey( *this );
+		up.setInputHandler( this );
+		down.setInputHandler( this );
+		left.setInputHandler( this );
+		right.setInputHandler( this );
+		attack.setInputHandler( this );
+		menu.setInputHandler( this );
 	}
 
 	void CInputHandler::releaseAll() {
