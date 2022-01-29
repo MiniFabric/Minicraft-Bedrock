@@ -20,13 +20,13 @@ namespace MiniCraft {
 
 	void CInputHandler::releaseAll() {
 		for ( auto key : keys ) {
-			key.down = false;
+			key->down = false;
 		}
 	}
 
 	void CInputHandler::tick() {
 		for ( auto key : keys ) {
-			key.tick();
+			key->tick();
 		}
 	}
 
@@ -79,7 +79,7 @@ namespace MiniCraft {
 		}
 	}
 
-	void CInputHandler::printState() {
+	void CInputHandler::printState() const {
 		std::cout << "up: " << up.down << "down: " << down.down << "left: " << left.down << "right: " << right.down << "menu: " << menu.down << "attack: " << attack.down << "\n";
 	}
 }

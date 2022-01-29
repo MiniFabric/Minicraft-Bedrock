@@ -13,7 +13,7 @@ namespace MiniCraft {
 
 	class CInputHandler {
 	public:
-		std::vector<CKey> keys = std::vector<CKey>();
+		std::vector<CKey*> keys = std::vector<CKey*>();
 		CKey up;
 		CKey down;
 		CKey left;
@@ -26,7 +26,7 @@ namespace MiniCraft {
 		void tick();
 		void toggle( SDL_Event *evt, bool pressed );
 
-		void printState();
+		void printState() const;
 	};
 }
 
