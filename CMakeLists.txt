@@ -6,9 +6,16 @@ add_subdirectory(
 		vendor/raycpp
 		vendor/raycpp/build
 )
+add_subdirectory(
+		vendor/raylib
+		vendor/raylib/build
+)
 
 find_package( SDL2 REQUIRED )
-include_directories( MiniCraft ${SDL2_INCLUDE_DIRS} )
+include_directories( MiniCraft
+		${SDL2_INCLUDE_DIRS}
+		vendor/raycpp/include
+)
 
 add_executable( MiniCraft
 		src/main.cpp
