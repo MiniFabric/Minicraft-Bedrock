@@ -6,7 +6,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_timer.h>
 #include "input/InputHandler.hpp"
-#include "raylib-cpp.hpp"
 
 namespace MiniCraft {
 	class CApp {
