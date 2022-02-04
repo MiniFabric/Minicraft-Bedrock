@@ -40,9 +40,6 @@ if (NOT raylib_cpp_FOUND)
 	endif()
 endif()
 
-find_package( SDL2 REQUIRED )
-include_directories( MiniCraft ${SDL2_INCLUDE_DIRS} )
-
 add_executable( MiniCraft
 		src/main.cpp
 		src/CApp.cpp
@@ -58,7 +55,21 @@ add_executable( MiniCraft
 		src/gfx/CSpriteSheet.hpp
 )
 
-target_link_libraries(MiniCraft PUBLIC SDL2 raylib rayliv_cpp)
+if ( WIN32 )
+	find_package(SDL2 CONFIG REQUIRED)
+	target_link_libraries( MiniCraft PUBLIC SDL2::SDL2 SDL2::SDL2main )
+else()
+	find_package( SDL2 REQUIRED )
+	target_link_libraries( MiniCraft PUBLIC SDL2 )
+endif()
+
+target_link_libraries(MiniCraft PUBLIC raylib raylib_cpp)
+target_include_directories( MiniCraft PUBLIC
+		${SDL2_INCLUDE_DIRS}
+		${CMAKE_CURRENT_SOURCE_DIR}/cmake-build-debug-wsl-msvc/_deps/raylib-src/include
+		${CMAKE_CURRENT_SOURCE_DIR}/cmake-build-debug-wsl-msvc/_deps/raylib_cpp-src/include
+)
+
 
 # Checks if OSX and links appropriate frameworks (Only required on MacOS)
 if (APPLE)
