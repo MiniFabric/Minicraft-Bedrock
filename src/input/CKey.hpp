@@ -4,6 +4,7 @@
 #ifndef CKEY_HPP
 #define CKEY_HPP
 
+#include <vector>
 #include <set>
 #include "raylib.h"
 
@@ -13,7 +14,7 @@ namespace MiniCraft::Input {
 	class CKey {
 	private:
 		CInputHandler *handler = nullptr;
-		std::set<KeyboardKey> boundKeys = std::set<KeyboardKey>();
+		std::vector<KeyboardKey> boundKeys{};
 	public:
 		int presses = 0, absorbs = 0;
 		bool down = false, clicked = false;
@@ -28,7 +29,7 @@ namespace MiniCraft::Input {
 		auto operator==(const CKey &other) const -> bool;
 		auto operator!=(const CKey &other) const -> bool;
 
-		auto getBoundKeys() -> std::set<KeyboardKey>;
+		auto getBoundKeys() -> std::vector<KeyboardKey>;
 		auto addBoundKey( std::initializer_list<KeyboardKey> keys ) -> void;
 
 		void handle(KeyboardKey key);

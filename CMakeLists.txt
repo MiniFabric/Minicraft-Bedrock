@@ -52,8 +52,7 @@ add_executable( MiniCraft
 		src/gfx/CScreen.cpp
 		src/gfx/CScreen.hpp
 		src/gfx/CSpriteSheet.cpp
-		src/gfx/CSpriteSheet.hpp
-)
+		src/gfx/CSpriteSheet.hpp)
 
 target_link_libraries(MiniCraft PUBLIC raylib raylib_cpp)
 target_include_directories( MiniCraft PUBLIC

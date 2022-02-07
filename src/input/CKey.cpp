@@ -12,7 +12,7 @@ namespace MiniCraft::Input {
 		// remove reference to this key on destruction
 		if (
 			this->handler != nullptr &&
-					std::find(this->handler->bindings.begin(), this->handler->bindings.end(), this ) != this->handler->bindings.end()
+			std::find( this->handler->bindings.begin(), this->handler->bindings.end(), this ) != this->handler->bindings.end()
 		)
 			this->handler->bindings.erase(
 				std::remove(handler->bindings.begin(), handler->bindings.end(), this ),
@@ -55,18 +55,18 @@ namespace MiniCraft::Input {
 		this->handler->bindings.push_back(this);
 	}
 
-	auto CKey::getBoundKeys() -> std::set<KeyboardKey> {
+	auto CKey::getBoundKeys() -> std::vector<KeyboardKey> {
 		return this->boundKeys;
 	}
 
 	auto CKey::addBoundKey( std::initializer_list<KeyboardKey> keys ) -> void {
 		for ( auto key : keys ) {
-			this->boundKeys.insert( key );
+			this->boundKeys.push_back( key );
 		}
 	}
 
 	auto CKey::handle( KeyboardKey key ) -> void {
-		if ( this->boundKeys.contains(key) ) {
+		if ( std::find( this->boundKeys.begin(), this->boundKeys.end(), key ) != this->boundKeys.end() ) {
 			this->toggle( IsKeyDown(key) );
 		}
 	}

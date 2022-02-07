@@ -13,7 +13,7 @@ namespace MiniCraft::Input {
 
 	class CInputHandler {
 	public:
-		std::vector<CKey*> bindings = std::vector<CKey*>();
+		std::vector<CKey*> bindings{};
 		CKey up;
 		CKey down;
 		CKey left;
