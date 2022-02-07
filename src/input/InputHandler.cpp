@@ -1,8 +1,6 @@
 //
 // Created by ENDERZOMBI102 on 28/01/2022.
 //
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "readability-convert-member-functions-to-static"
 
 #include <iostream>
 #include "InputHandler.hpp"
@@ -10,84 +8,43 @@
 namespace MiniCraft::Input {
 
 	CInputHandler::CInputHandler() {
-		up.setInputHandler( this );
-		down.setInputHandler( this );
-		left.setInputHandler( this );
-		right.setInputHandler( this );
-		attack.setInputHandler( this );
-		menu.setInputHandler( this );
+		this->up.setInputHandler( this );
+		this->up.addBoundKey( { KEY_KP_8, KEY_W, KEY_UP } );
+		this->down.setInputHandler( this );
+		this->down.addBoundKey( { KEY_KP_8, KEY_W, KEY_UP } );
+		this->left.setInputHandler( this );
+		this->left.addBoundKey({ KEY_KP_2, KEY_S, KEY_DOWN } );
+		this->right.setInputHandler( this );
+		this->right.addBoundKey({ KEY_KP_4, KEY_A, KEY_LEFT } );
+		this->menu.setInputHandler( this );
+		this->menu.addBoundKey({ KEY_TAB, KEY_LEFT_ALT, KEY_RIGHT_ALT, KEY_ENTER, KEY_KP_ENTER, KEY_X } );
+		this->attack.setInputHandler( this );
+		this->attack.addBoundKey({ KEY_SPACE, KEY_RIGHT_CONTROL, KEY_LEFT_CONTROL, KEY_KP_0, KEY_INSERT, KEY_C } );
 	}
 
-	void CInputHandler::releaseAll() {
-		for ( auto key : keys ) {
-			key->down = false;
+	auto CInputHandler::releaseAll() -> void {
+		for ( auto binding : bindings ) {
+			binding->down = false;
 		}
 	}
 
-	void CInputHandler::tick() {
-		for ( auto key : keys ) {
-			key->tick();
+	auto CInputHandler::tick() -> void {
+		for ( auto key = GetKeyPressed(); key != 0; key = GetKeyPressed() ) {
+			for ( auto binding : this->bindings )
+				binding->handle( static_cast<KeyboardKey>(key) );
+		}
+		std::cout << __FILE__ << " " << __LINE__ << std::endl;
+		for ( auto binding : bindings ) {
+			binding->tick();
 		}
 	}
 
-	void CInputHandler::toggle(SDL_Event *evt, bool pressed) {
-		switch ( evt->key.keysym.sym ) {
-			// UP
-			case SDLK_KP_8:
-			case SDLK_w:
-			case SDLK_UP:
-				this->up.toggle( pressed );
-				break;
-			// DOWN
-			case SDLK_KP_2:
-			case SDLK_s:
-			case SDLK_DOWN:
-				down.toggle( pressed );
-				break;
-			// LEFT
-			case SDLK_KP_4:
-			case SDLK_a:
-			case SDLK_LEFT:
-				left.toggle( pressed );
-				break;
-			// RIGHT
-			case SDLK_KP_6:
-			case SDLK_d:
-			case SDLK_RIGHT:
-				right.toggle( pressed );
-				break;
-			// MENU
-			case SDLK_TAB:
-			case SDLK_LALT:
-			case SDLK_RALT:
-			case SDLK_RETURN:
-			case SDLK_RETURN2:
-			case SDLK_x:
-				menu.toggle( pressed );
-				break;
-			// ATTACK
-			case SDLK_SPACE:
-			case SDLK_RCTRL:
-			case SDLK_LCTRL:
-			case SDLK_KP_0:
-			case SDLK_INSERT:
-			case SDLK_c:
-				attack.toggle( pressed );
-				break;
-			// NOTHINGS
-			default:
-				break;
-		}
-	}
-
-	void CInputHandler::printState() const {
+	auto CInputHandler::printState() const -> void {
 		std::cout << "up: " << up.down <<
 					" down: " << down.down <<
 					" left: " << left.down <<
 					" right: " << right.down <<
 					" menu: " << menu.down <<
-					" attack: " << attack.down << "\n";
+					" attack: " << attack.down << std::endl;
 	}
 }
-
-#pragma clang diagnostic pop

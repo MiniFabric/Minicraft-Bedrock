@@ -5,15 +5,15 @@
 #define CINPUTHANDLER_HPP
 
 #include <vector>
-#include <SDL.h>
 #include "CKey.hpp"
+#include "raylib-cpp.hpp"
 
 namespace MiniCraft::Input {
 //	class CKey;
 
 	class CInputHandler {
 	public:
-		std::vector<CKey*> keys = std::vector<CKey*>();
+		std::vector<CKey*> bindings = std::vector<CKey*>();
 		CKey up;
 		CKey down;
 		CKey left;
@@ -23,11 +23,10 @@ namespace MiniCraft::Input {
 	public:
 		CInputHandler();
 
-		void releaseAll();
-		void tick();
-		void toggle( SDL_Event *evt, bool pressed );
+		auto releaseAll() -> void;
+		auto tick() -> void;
 
-		void printState() const;
+		auto printState() const -> void;
 	};
 }
 

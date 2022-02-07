@@ -3,29 +3,27 @@
 //
 #pragma once
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_timer.h>
+#include "memory"
+#include "Const.hpp"
 #include "input/InputHandler.hpp"
 #include "raylib-cpp.hpp"
 
 namespace MiniCraft {
 	class CApp {
 		bool running;
-		SDL_Window *window;
+		std::unique_ptr<raylib::Window> window;
 		Input::CInputHandler inputHandler;
 	public:
 		CApp() noexcept;
 
-		int run();
+		auto run() -> int;
 
-		bool initSDL();
-		void initGame();
+		auto init() -> void;
 
-		void processEvent(SDL_Event *evt);
-		void tick();
-		void render();
-		void cleanup();
-		void resetGame();
+		auto tick() -> void;
+		auto render() -> void;
+		auto cleanup() -> void;
+		auto resetGame() -> void;
 	};
 
 	static CApp *GAME = new CApp(); // NOLINT(cert-err58-cpp)

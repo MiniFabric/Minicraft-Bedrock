@@ -1585,9 +1585,9 @@ MATHJAX_CODEFILE       =
 # (what the <access key> is depends on the OS and browser, but it is typically
 # <CTRL>, <ALT>/<option>, or both). Inside the search box use the <cursor down
 # key> to jump into the search results window, the results can be navigated
-# using the <cursor keys>. Press <Enter> to select an item or <escape> to cancel
+# using the <cursor bindings>. Press <Enter> to select an item or <escape> to cancel
 # the search. The filter options can be selected when the cursor is inside the
-# search box by pressing <Shift>+<cursor down>. Also here use the <cursor keys>
+# search box by pressing <Shift>+<cursor down>. Also here use the <cursor bindings>
 # to select a filter and <Enter> or <escape> to activate or cancel the filter
 # option.
 # The default value is: YES.

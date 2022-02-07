@@ -11,16 +11,16 @@ namespace MiniCraft::Input {
 	CKey::~CKey() {
 		// remove reference to this key on destruction
 		if (
-				this->handler != nullptr &&
-				std::find(this->handler->keys.begin(), this->handler->keys.end(), this ) != this->handler->keys.end()
+			this->handler != nullptr &&
+					std::find(this->handler->bindings.begin(), this->handler->bindings.end(), this ) != this->handler->bindings.end()
 		)
-			this->handler->keys.erase(
-					std::remove( handler->keys.begin(), handler->keys.end(), this ),
-					this->handler->keys.end()
+			this->handler->bindings.erase(
+				std::remove(handler->bindings.begin(), handler->bindings.end(), this ),
+				this->handler->bindings.end()
 			);
 	}
 
-	void CKey::toggle(bool pressed) {
+	auto CKey::toggle( bool pressed ) -> void{
 		if (pressed != down) {
 			down = pressed;
 		}
@@ -30,8 +30,8 @@ namespace MiniCraft::Input {
 		}
 	}
 
-	void CKey::tick() {
-		if (absorbs < presses) {
+	auto CKey::tick() -> void {
+		if ( absorbs < presses ) {
 			absorbs++;
 			clicked = true;
 		} else {
@@ -39,19 +39,35 @@ namespace MiniCraft::Input {
 		}
 	}
 
-	bool CKey::operator==(const CKey &other) const {
+	auto CKey::operator==(const CKey &other) const -> bool {
 		return other.presses == this->presses &&
 		       other.absorbs == this->absorbs &&
 		       other.clicked == this->clicked &&
 		       other.down == this->down;
 	}
 
-	bool CKey::operator!=(const CKey &other) const {
+	auto CKey::operator!=(const CKey &other) const -> bool {
 		return !( *this == other );
 	}
 
-	void CKey::setInputHandler( CInputHandler *pHandler ) {
+	auto CKey::setInputHandler( CInputHandler *pHandler ) -> void {
 		this->handler = pHandler;
-		this->handler->keys.push_back(this);
+		this->handler->bindings.push_back(this);
+	}
+
+	auto CKey::getBoundKeys() -> std::set<KeyboardKey> {
+		return this->boundKeys;
+	}
+
+	auto CKey::addBoundKey( std::initializer_list<KeyboardKey> keys ) -> void {
+		for ( auto key : keys ) {
+			this->boundKeys.insert( key );
+		}
+	}
+
+	auto CKey::handle( KeyboardKey key ) -> void {
+		if ( this->boundKeys.contains(key) ) {
+			this->toggle( IsKeyDown(key) );
+		}
 	}
 }
