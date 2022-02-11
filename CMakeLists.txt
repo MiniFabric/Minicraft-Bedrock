@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 project(MiniCraft)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)  # required for MSVC
 
 # raylib
 find_package(raylib QUIET)
@@ -49,10 +49,7 @@ add_executable( MiniCraft
 		src/input/CKey.cpp
 		src/input/CKey.hpp
 		src/Const.hpp
-		src/gfx/CScreen.cpp
-		src/gfx/CScreen.hpp
-		src/gfx/CSpriteSheet.cpp
-		src/gfx/CSpriteSheet.hpp)
+		src/core/io/CKey.cpp src/core/io/CKey.hpp src/core/io/InputHandler.cpp src/core/io/InputHandler.hpp src/core/io/Keys.hpp)
 
 target_link_libraries(MiniCraft PUBLIC raylib raylib_cpp)
 target_include_directories( MiniCraft PUBLIC
